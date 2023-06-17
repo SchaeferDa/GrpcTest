@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcTest.Shared";
+import "google/api/annotations.proto";
+
+// Provides mathematical functions
+service MathService {
+  // Adds two given numbers and returns its sum
+  rpc Add (MathAddRequest) returns (MathAddResponse) {
+	  option (google.api.http) = {
+		  post: "/rest/math/add",
+		  body: "*"
+	  };
+  }
+}
+
+message MathAddRequest {
+  // First number
+  int32 a = 1;
+
+  // Second number
+  int32 b = 2;
+}
+
+message MathAddResponse {
+  // Sum of first and second number
+  int32 sum = 1;
+}

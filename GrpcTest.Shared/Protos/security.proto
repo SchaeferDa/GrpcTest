@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcTest.Shared";
+import "google/api/annotations.proto";
+
+// Provides security functions
+service SecurityService {
+  // Hashes binary input data with SHA512 algorithm
+  rpc HashSha512 (SecurityHashSha512Request) returns (SecurityHashSha512Response) {
+	  option (google.api.http) = {
+		  post: "/rest/security/hashsha512",
+		  body: "*"
+	  };
+  }
+}
+
+message SecurityHashSha512Request {
+  // Binary input data
+  bytes input = 1;
+}
+
+message SecurityHashSha512Response {
+  // Binary hash data
+  bytes hash = 1;
+}
